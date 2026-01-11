@@ -1,0 +1,47 @@
+service: ecommerce-lambdas
+frameworkVersion: "3"
+
+plugins:
+  - serverless-esbuild
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ${env:AWS_REGION, 'us-east-1'}
+
+  # ✅ Only these go into Lambda env
+  environment:
+    KAFKA_BROKER: ${env:KAFKA_BROKER, ''}
+    KAFKA_USERNAME: ${env:KAFKA_USERNAME, ''}
+    KAFKA_PASSWORD: ${env:KAFKA_PASSWORD, ''}
+    KAFKA_CLIENT_ID: ${env:KAFKA_CLIENT_ID, 'ecommerce-platform'}
+    KAFKA_PAYMENT_TOPIC: ${env:KAFKA_PAYMENT_TOPIC, 'payment-events'}
+    SES_FROM_EMAIL: ${env:SES_FROM_EMAIL, ''}
+    NOTIFY_TO_EMAIL: ${env:NOTIFY_TO_EMAIL, ''}
+
+  # ✅ IAM must be INSIDE provider
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - ses:SendEmail
+            - ses:SendRawEmail
+          Resource: "*"
+
+functions:
+  payment:
+    handler: payment-lambda/handler.handler
+    timeout: 30
+
+  notification:
+    handler: notification-lambda/handler.handler
+    timeout: 30
+
+custom:
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+    platform: node
+    target: node18
