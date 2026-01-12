@@ -16,6 +16,13 @@ This repo is a **backend-only** (Postman-first) reference implementation of a sc
 - Confluent Cloud Kafka cluster + API Key/Secret + bootstrap server
 - Aws Free tier and IAM admin Access
 
+## 0) Architecture patterns implemented
+
+✅ **API Gateway Pattern**
+✅ **Database per Microservice**
+✅ **Event-driven / Pub-Sub**
+✅ **Eventual consistency**
+
 ---
 
 ## 1) Setup
