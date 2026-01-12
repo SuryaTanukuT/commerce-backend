@@ -1,4 +1,4 @@
-# Event-Driven E-Commerce (Microservices + Kafka + MongoDB + GraphQL + "Lambda" workers)
+# Event-Driven E-Commerce (Microservices + Kafka + MongoDB + GraphQL + Lambda workers)
 
 This repo is a **backend-only** (Postman-first) reference implementation of a scalable, event-driven e-commerce platform:
 
