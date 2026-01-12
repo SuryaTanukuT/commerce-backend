@@ -18,12 +18,12 @@ This repo is a **backend-only** (Postman-first) reference implementation of a sc
 
 ## 0) Architecture patterns implemented
 
-✅ **API Gateway Pattern**
-✅ **Database per Microservice**
-✅ **Event-driven / Pub-Sub**
-✅ **Eventual consistency**
+**API Gateway Pattern**
+**Database per Microservice**
+**Event-driven / Pub-Sub**
+**Eventual consistency**
 
-## 2) Tech Stack
+## ) Tech Stack
 
 ### Language & Runtime
 - **Node.js + TypeScript** across all backend services
