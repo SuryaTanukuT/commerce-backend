@@ -23,6 +23,37 @@ This repo is a **backend-only** (Postman-first) reference implementation of a sc
 ✅ **Event-driven / Pub-Sub**
 ✅ **Eventual consistency**
 
+## 2) Tech Stack
+
+### Language & Runtime
+- **Node.js + TypeScript** across all backend services
+
+### API Layer
+- **GraphQL (Apollo Server)** as the **API Gateway**
+- Gateway forwards GraphQL operations to internal REST microservices
+
+### Microservices
+- **User Service** — Express + MongoDB  
+- **Product Service** — Express + MongoDB  
+- **Order Service** — Express + MongoDB  
+
+### Event‑Driven Messaging
+- **Confluent Cloud Kafka** (KafkaJS client)
+- Topics:
+  - `order-events` — OrderCreated, OrderCancelled
+  - `payment-events` — PaymentCompleted, PaymentFailed
+
+### Data Layer
+- **MongoDB Atlas (Free Tier)**
+- **Database‑per‑service** pattern:
+  - users DB  
+  - products DB  
+  - orders DB  
+
+### Authentication
+- **JWT (Bearer Token)**
+- Tokens issued by **User Service**
+- Validated by Product and Order services
 ---
 
 ## 1) Setup
@@ -161,6 +192,7 @@ Events are JSON payloads with a `type` field:
 - JWT is issued by `user-service`
 - Services validate JWT using `JWT_SECRET`
 - Order creation requires auth (simple middleware)
+  
 
 ---
 
