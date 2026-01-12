@@ -9,15 +9,12 @@ This repo is a **backend-only** (Postman-first) reference implementation of a sc
 - **Serverless**: payment + notification are written as **AWS Lambda handlers**
   - For local run, we provide **workers** that consume Kafka and invoke the Lambda handlers (so you can run end-to-end without AWS).
 
-> ✅ No Docker required.
-
----
-
 ## 0) Prerequisites
 
 - Node.js 18+
 - MongoDB Atlas URIs (one per service)
 - Confluent Cloud Kafka cluster + API Key/Secret + bootstrap server
+- Aws Free tier and IAM admin Access
 
 ---
 
@@ -132,16 +129,13 @@ Add header in Postman:
 
 ## 5) Notes on AWS Lambda / Serverless
 
-We included:
+I included:
 - `payment-lambda/handler.ts` (Lambda handler)
 - `notification-lambda/handler.ts` (Lambda handler)
 - `serverless.yml` (deployable)
 
-For **Confluent Cloud → Lambda triggers**, you typically need:
-- a bridge/connector (or MSK if using AWS-native Kafka)
-- or a small always-on consumer (Fargate/ECS) that invokes Lambda
-
-For this repo, the **local-workers** package simulates this.
+For **Confluent Cloud → Lambda triggers**,
+I consumed **local-workers** package simulates this.
 
 ---
 
@@ -169,11 +163,6 @@ Events are JSON payloads with a `type` field:
 - Correlation id is attached to Kafka messages for tracing
 
 ---
-
-Happy building. 🚀
-
-
-## Option B: Use real AWS Lambda (without paid Confluent connectors)
 
 In this mode, Kafka remains on Confluent Cloud, but `local-workers` invokes AWS Lambda functions remotely using the AWS SDK.
 
